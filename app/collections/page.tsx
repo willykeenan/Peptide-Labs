@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { COLLECTIONS, PRODUCTS } from "@/lib/catalog";
+import { matchesCollection } from "@/lib/catalog";
+import { COLLECTIONS, PRODUCTS } from "@/lib/catalog.server";
 
 export default function CollectionsPage() {
   return (
@@ -15,7 +16,7 @@ export default function CollectionsPage() {
             <div style={{ fontWeight: 900 }}>{c.name}</div>
             <div className="small" style={{ marginTop: 6 }}>{c.blurb}</div>
             <div className="small" style={{ marginTop: 10 }}>
-              {PRODUCTS.filter(p => p.tags.includes(c.name) || p.tags.includes(c.name.slice(0,1).toUpperCase()+c.name.slice(1))).length} items
+              {PRODUCTS.filter(p => matchesCollection(p, c.name)).length} items
             </div>
           </Link>
         ))}

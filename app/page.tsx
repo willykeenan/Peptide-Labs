@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ProductGrid from "@/components/ProductGrid";
-import { FEATURED, RECENT } from "@/lib/catalog";
+import { FEATURED, RECENT } from "@/lib/catalog.server";
 
 export default function Home() {
   return (

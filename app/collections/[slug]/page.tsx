@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ProductGrid from "@/components/ProductGrid";
-import { COLLECTIONS, PRODUCTS } from "@/lib/catalog";
+import { matchesCollection, sortInStockFirst } from "@/lib/catalog";
+import { COLLECTIONS, PRODUCTS } from "@/lib/catalog.server";
 
 export function generateStaticParams() {
   return COLLECTIONS.map(c => ({ slug: c.slug }));
@@ -9,7 +10,8 @@ export function generateStaticParams() {
 export default function CollectionDetail({ params }: { params: { slug: string } }) {
   const col = COLLECTIONS.find(c => c.slug === params.slug);
   const name = col?.name ?? "Collection";
-  const filtered = PRODUCTS.filter(p => p.tags.includes(name));
+  const filtered = PRODUCTS.filter(p => matchesCollection(p, name));
+  const sorted = sortInStockFirst(filtered.length ? filtered : PRODUCTS);
 
   return (
     <>
@@ -21,7 +23,7 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
         <Link className="btn" href="/collections">All collections</Link>
       </div>
 
-      <ProductGrid products={filtered.length ? filtered : PRODUCTS} />
+      <ProductGrid products={sorted} />
     </>
   );
 }

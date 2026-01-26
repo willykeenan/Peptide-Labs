@@ -1,14 +1,14 @@
 import Link from "next/link";
-import { PRODUCTS } from "@/lib/catalog";
+import { PRODUCTS } from "@/lib/catalog.server";
 
 export function generateStaticParams() {
-  return PRODUCTS.map(p => ({ slug: p.slug }));
+  return PRODUCTS.filter(p => p.hasCOA).map(p => ({ slug: p.slug }));
 }
 
 export default function CoaPage({ params }: { params: { slug: string } }) {
   const product = PRODUCTS.find(p => p.slug === params.slug);
 
-  if (!product) return <div className="card">COA not found</div>;
+  if (!product || !product.hasCOA) return <div className="card">COA not found</div>;
 
   return (
     <div className="card">

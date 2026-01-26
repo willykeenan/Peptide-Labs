@@ -4,123 +4,152 @@ export type Product = {
   slug: string;
   name: string;
   subtitle: string;
-  price: number;
-  compareAt?: number;
-  category: "Singles" | "Blends" | "Accessories";
+  category: string;
   tags: string[];
-  format: string;
+  price: number;
+  isVariable: boolean;
+  priceMin?: number;
+  priceMax?: number;
   inStock: boolean;
-  coaPath: string;
+  hasCOA: boolean;
+  coaPath?: string;
   short: string;
 };
 
-export const COLLECTIONS = [
+export type Collection = {
+  slug: string;
+  name: string;
+  blurb: string;
+};
+
+export const COLLECTIONS: Collection[] = [
   { slug: "recovery", name: "Recovery", blurb: "Research peptides commonly used in recovery-focused lab contexts." },
   { slug: "dermal", name: "Dermal", blurb: "Research blends frequently explored for dermal-related investigation." },
   { slug: "metabolic", name: "Metabolic", blurb: "Compounds commonly used in metabolic research." },
   { slug: "essentials", name: "Essentials", blurb: "Accessories and essentials for laboratory workflows." },
 ] as const;
 
-export const PRODUCTS: Product[] = [
-  {
-    id: "p_klow_kl80",
-    sku: "KL80",
-    slug: "klow-kl80",
-    name: "KLOW",
-    subtitle: "Multi-Peptide Dermal Research Complex",
-    price: 60,
-    category: "Blends",
-    tags: ["Dermal", "Blends", "Featured"],
-    format: "Lyophilized peptide blend • vial",
-    inStock: true,
-    coaPath: "/coas/klow-kl80",
-    short: "A multi-peptide dermal research complex for laboratory and analytical workflows. Lot tracked with COA documentation."
-  },
-  {
-    id: "p_reta_rt10",
-    sku: "RT10",
-    slug: "reta-rt10",
-    name: "RETA",
-    subtitle: "Tri-Agonist Metabolic Research Peptide",
-    price: 75,
-    category: "Singles",
-    tags: ["Metabolic", "Research", "Featured"],
-    format: "Lyophilized peptide • vial",
-    inStock: true,
-    coaPath: "/coas/reta-rt10",
-    short: "A tri-agonist research peptide for metabolic pathway studies. Lot tracked with COA documentation."
-  },
-  {
-    id: "p_bpc_5",
-    sku: "BPC5",
-    slug: "bpc-157-5mg",
-    name: "BPC-157",
-    subtitle: "Research peptide • 5mg",
-    price: 29,
-    category: "Singles",
-    tags: ["Recovery", "Research", "COA"],
-    format: "Lyophilized powder",
-    inStock: false,
-    coaPath: "/coas/bpc-157-5mg",
-    short: "Lot-tracked. Third-party COA available."
-  },
-  {
-    id: "p_tb500_5",
-    sku: "TB5",
-    slug: "tb-500-5mg",
-    name: "TB-500",
-    subtitle: "Research peptide • 5mg",
-    price: 39,
-    category: "Singles",
-    tags: ["Recovery", "Research", "COA"],
-    format: "Lyophilized powder",
-    inStock: false,
-    coaPath: "/coas/tb-500-5mg",
-    short: "Transparent documentation with COA link."
-  },
-  {
-    id: "p_ghkcu_50",
-    sku: "GHK50",
-    slug: "ghk-cu-50mg",
-    name: "GHK-Cu",
-    subtitle: "Copper peptide • 50mg",
-    price: 44,
-    category: "Singles",
-    tags: ["Dermal", "Research", "COA"],
-    format: "Lyophilized powder",
-    inStock: false,
-    coaPath: "/coas/ghk-cu-50mg",
-    short: "Batch documentation and purity reporting."
-  },
-  {
-    id: "p_complex_dermal",
-    sku: "GL55",
-    slug: "dermal-research-complex",
-    name: "GLOW Dermal Peptide Research Complex",
-    subtitle: "Multi-peptide blend • 70mg",
-    price: 55,
-    category: "Blends",
-    tags: ["Dermal", "Blends", "COA"],
-    format: "Lyophilized powder",
-    inStock: false,
-    coaPath: "/coas/dermal-research-complex",
-    short: "Dermal-focused blend with lot tracking and COA documentation."
-  },
-  {
-    id: "p_bac_water",
-    sku: "BAC30",
-    slug: "bacteriostatic-water-30ml",
-    name: "Bacteriostatic Water 30mL",
-    subtitle: "Sterile Lab Accessory",
-    price: 15,
-    category: "Accessories",
-    tags: ["Essentials", "Accessories", "Featured"],
-    format: "30mL vial",
-    inStock: true,
-    coaPath: "/coas/bacteriostatic-water-30ml",
-    short: "Sterile bacteriostatic water for laboratory workflows."
-  }
-];
+const normalizeCell = (value: string) => value.trim();
 
-export const FEATURED = PRODUCTS.filter(p => p.inStock && p.tags.includes("Featured"));
-export const RECENT = PRODUCTS.slice(1, 5);
+export function parseCsvRows(input: string): string[][] {
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let field = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < input.length; i += 1) {
+    const char = input[i];
+    const next = input[i + 1];
+
+    if (char === "\"") {
+      if (inQuotes && next === "\"") {
+        field += "\"";
+        i += 1;
+      } else {
+        inQuotes = !inQuotes;
+      }
+      continue;
+    }
+
+    if (char === "," && !inQuotes) {
+      row.push(normalizeCell(field));
+      field = "";
+      continue;
+    }
+
+    if ((char === "\n" || char === "\r") && !inQuotes) {
+      if (char === "\r" && next === "\n") {
+        i += 1;
+      }
+      row.push(normalizeCell(field));
+      if (row.some(cell => cell.length > 0)) {
+        rows.push(row);
+      }
+      row = [];
+      field = "";
+      continue;
+    }
+
+    field += char;
+  }
+
+  row.push(normalizeCell(field));
+  if (row.some(cell => cell.length > 0)) {
+    rows.push(row);
+  }
+
+  return rows;
+}
+
+const toBool = (value: string) => value.toLowerCase() === "true";
+const toNumber = (value: string) => (value ? Number(value) : undefined);
+
+export function parseProductsCsv(csv: string): Product[] {
+  const rows = parseCsvRows(csv);
+  const header = rows[0]?.map(h => h.trim());
+  if (!header) return [];
+  const dataRows = rows.slice(1);
+
+  return dataRows.map((cells, index) => {
+    const record: Record<string, string> = {};
+    header.forEach((key, i) => {
+      record[key] = cells[i] ?? "";
+    });
+
+    const tags = record.tags
+      ? record.tags.split(",").map(t => t.trim()).filter(Boolean)
+      : [];
+
+    const isVariable = toBool(record.isVariable);
+    const price = toNumber(record.price) ?? (isVariable ? (toNumber(record.priceMin) ?? 0) : 0);
+    const priceMin = toNumber(record.priceMin);
+    const priceMax = toNumber(record.priceMax);
+    const inStock = toBool(record.inStock);
+    const hasCOA = toBool(record.hasCOA);
+
+    return {
+      id: `p_${record.slug.replace(/[^a-z0-9]+/gi, "_").toLowerCase() || index}`,
+      sku: record.sku,
+      slug: record.slug,
+      name: record.name,
+      subtitle: record.subtitle,
+      category: record.category,
+      tags,
+      price,
+      isVariable,
+      priceMin,
+      priceMax,
+      inStock,
+      hasCOA,
+      coaPath: hasCOA ? `/coas/${record.slug}` : undefined,
+      short: record.subtitle,
+    };
+  });
+}
+
+export function formatPriceDisplay(product: Product) {
+  if (product.isVariable) {
+    const min = product.priceMin ?? product.price;
+    const max = product.priceMax ?? product.price;
+    return `$${min.toFixed(2)} – $${max.toFixed(2)}`;
+  }
+  return `$${product.price.toFixed(2)}`;
+}
+
+export function getUnitPrice(product: Product) {
+  if (product.isVariable) {
+    return product.priceMin ?? product.price;
+  }
+  return product.price;
+}
+
+export function matchesCollection(product: Product, collectionName: string) {
+  const target = collectionName.toLowerCase();
+  const tagMatch = product.tags.some(tag => tag.toLowerCase() === target);
+  const categoryMatch = product.category.toLowerCase() === target;
+  return tagMatch || categoryMatch;
+}
+
+export function sortInStockFirst(products: Product[]) {
+  return [...products].sort((a, b) => Number(b.inStock) - Number(a.inStock));
+}

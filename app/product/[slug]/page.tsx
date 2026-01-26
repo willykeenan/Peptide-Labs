@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { PRODUCTS } from "@/lib/catalog";
+import { formatPriceDisplay } from "@/lib/catalog";
+import { PRODUCTS } from "@/lib/catalog.server";
 import ProductImage from "@/components/ProductImage";
 
 export function generateStaticParams() {
@@ -31,8 +32,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           </div>
         </div>
         <div style={{ textAlign: "right", minWidth: 160 }}>
-          {product.compareAt ? <div className="small"><s>${product.compareAt.toFixed(2)}</s></div> : null}
-          <div style={{ fontWeight: 900, fontSize: 20 }}>${product.price.toFixed(2)}</div>
+          <div style={{ fontWeight: 900, fontSize: 20 }}>{formatPriceDisplay(product)}</div>
           <div className="small" style={{ marginTop: 6 }}>{product.inStock ? "In stock" : "Out of stock"}</div>
         </div>
       </div>
@@ -44,11 +44,15 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         <div className="small"><b>SKU:</b> {product.sku}</div>
         <div className="small"><b>Category:</b> {product.category}</div>
         <div className="small"><b>Stock:</b> {product.inStock ? "In stock" : "Out of stock"}</div>
-        <div className="small"><b>Price:</b> ${product.price.toFixed(2)}</div>
+        <div className="small"><b>Price:</b> {formatPriceDisplay(product)}</div>
       </div>
 
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
-        <Link className="btn" href={product.coaPath}>View COA</Link>
+        {product.hasCOA ? (
+          <Link className="btn" href={product.coaPath ?? `/coas/${product.slug}`}>View COA</Link>
+        ) : (
+          <button className="btn" disabled>COA unavailable</button>
+        )}
         <Link className="btn" href="/shop">Back to shop</Link>
       </div>
     </div>

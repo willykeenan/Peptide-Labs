@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useCart } from "@/components/cart/CartContext";
+import { formatPriceDisplay } from "@/lib/catalog";
 
 export default function CartPage() {
   const { state, getProduct, subtotal, remove, setQty, clear } = useCart();
@@ -27,7 +28,10 @@ export default function CartPage() {
                 <div key={line.productId} className="badge" style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "center" }}>
                   <div style={{ minWidth: 0 }}>
                     <div style={{ fontWeight: 900 }}>{p.name} <span className="small">• {p.subtitle}</span></div>
-                    <div className="small">${p.price.toFixed(2)} each</div>
+                    <div className="small">
+                      {p.isVariable ? "Price range " : "Price "}
+                      {formatPriceDisplay(p)}
+                    </div>
                   </div>
                   <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                     <input

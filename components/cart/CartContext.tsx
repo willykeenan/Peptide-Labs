@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useMemo, useState } from "react";
 import type { Product } from "@/lib/catalog";
-import { PRODUCTS } from "@/lib/catalog";
+import { getUnitPrice } from "@/lib/catalog";
 
 export type CartLine = { productId: string; qty: number };
 type CartState = { lines: CartLine[] };
@@ -19,20 +19,22 @@ type CartCtx = {
 
 const Ctx = createContext<CartCtx | null>(null);
 
-export function CartProvider({ children }: { children: React.ReactNode }) {
+export function CartProvider({ children, products }: { children: React.ReactNode; products: Product[] }) {
   const [state, setState] = useState<CartState>({ lines: [] });
 
-  const getProduct = (id: string) => PRODUCTS.find(p => p.id === id);
+  const getProduct = (id: string) => products.find(p => p.id === id);
 
   const subtotal = useMemo(() => {
     return state.lines.reduce((sum, l) => {
       const p = getProduct(l.productId);
-      return sum + (p ? p.price * l.qty : 0);
+      return sum + (p ? getUnitPrice(p) * l.qty : 0);
     }, 0);
-  }, [state]);
+  }, [state, products]);
 
   const add = (productId: string, qty = 1) => {
     setState(prev => {
+      const product = getProduct(productId);
+      if (!product || !product.inStock) return prev;
       const existing = prev.lines.find(l => l.productId === productId);
       if (existing) {
         return { lines: prev.lines.map(l => l.productId === productId ? { ...l, qty: l.qty + qty } : l) };
