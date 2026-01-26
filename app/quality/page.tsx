@@ -1,76 +1,19 @@
-import fs from "fs";
-import path from "path";
 import Link from "next/link";
+import { COA_MAP, PRODUCTS } from "@/lib/catalog.server";
 
-type CoaItem = {
-  name: string;
-  file: string;
-};
-
-const TOKEN_MAP: Record<string, string> = {
-  bpc: "BPC",
-  tb: "TB",
-  reta: "RETA",
-  tirz: "TIRZ",
-  ghk: "GHK",
-  tb500: "TB-500",
-  bpc157: "BPC-157",
-};
-
-const COMBINED_TOKENS: Array<{ tokens: string[]; label: string }> = [
-  { tokens: ["tb", "500"], label: "TB-500" },
-  { tokens: ["bpc", "157"], label: "BPC-157" },
-];
-
-const toTitleCase = (value: string) => value.charAt(0).toUpperCase() + value.slice(1);
-
-const toReadableName = (filename: string) => {
-  const base = filename.replace(/\.[^.]+$/, "");
-  const rawTokens = base.split("-").filter(Boolean);
-  const tokens = rawTokens.map(token => TOKEN_MAP[token] ?? token);
-  const words: string[] = [];
-
-  for (let i = 0; i < tokens.length; i += 1) {
-    const combined = COMBINED_TOKENS.find(entry =>
-      entry.tokens.every((token, idx) => tokens[i + idx] === token)
-    );
-    if (combined) {
-      words.push(combined.label);
-      i += combined.tokens.length - 1;
-      continue;
-    }
-
-    const token = tokens[i];
-    if (token === token.toUpperCase()) {
-      words.push(token);
-      continue;
-    }
-    if (/^\d+$/.test(token)) {
-      words.push(token);
-      continue;
-    }
-    words.push(toTitleCase(token));
-  }
-
-  return words.join(" ");
-};
-
-const getCoaItems = (): CoaItem[] => {
-  const coaDir = path.join(process.cwd(), "public", "coas");
-  if (!fs.existsSync(coaDir)) return [];
-
-  return fs
-    .readdirSync(coaDir)
-    .filter(file => /\.(png|jpg|jpeg|webp|pdf)$/i.test(file))
-    .sort((a, b) => a.localeCompare(b))
-    .map(file => ({
-      file,
-      name: toReadableName(file),
-    }));
+const getCoaEntries = () => {
+  return Object.entries(COA_MAP)
+    .map(([slug, meta]) => {
+      const product = PRODUCTS.find(p => p.slug === slug);
+      if (!product) return null;
+      return { slug, product, meta };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a!.product.name.localeCompare(b!.product.name));
 };
 
 export default function QualityPage() {
-  const coas = getCoaItems();
+  const coas = getCoaEntries();
 
   return (
     <div className="card">
@@ -78,6 +21,8 @@ export default function QualityPage() {
       <p className="p" style={{ maxWidth: 980, marginTop: 0 }}>
         Documentation-forward catalog with lot tracking and COA access. All listings are presented for research and lab workflows with neutral, factual copy.
       </p>
+
+      <h2 className="h2" style={{ marginTop: 0 }}>Certificates of Analysis (COAs)</h2>
 
       <div className="coa-tabs">
         <button className="coa-tab is-active" type="button">Lab Purity Results</button>
@@ -87,17 +32,24 @@ export default function QualityPage() {
         {coas.length === 0 ? (
           <div className="small">COA files will appear here once uploaded.</div>
         ) : (
-          coas.map(item => (
-            <a
-              key={item.file}
-              className="coa-card"
-              href={`/coas/${item.file}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div className="coa-name">{item.name}</div>
-              <div className="coa-link">Open COA</div>
-            </a>
+          coas.map(entry => (
+            <div key={entry!.slug} className="coa-card">
+              <div className="coa-name">{entry!.product.name}</div>
+              <div className="small">{entry!.product.subtitle}</div>
+              {entry!.meta.lot ? <div className="small">Lot: {entry!.meta.lot}</div> : null}
+              {entry!.meta.date ? <div className="small">Date: {entry!.meta.date}</div> : null}
+              {entry!.meta.lab ? <div className="small">Lab: {entry!.meta.lab}</div> : null}
+              <div>
+                <a
+                  className="btn"
+                  href={`/coas/${entry!.meta.file}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View COA
+                </a>
+              </div>
+            </div>
           ))
         )}
       </div>

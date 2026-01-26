@@ -36,10 +36,10 @@ export default function ProductCard({ product }: { product: Product }) {
 
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 14 }}>
         <Link className="btn" href={`/product/${product.slug}`}>View</Link>
-        {product.hasCOA ? (
-          <Link className="btn" href={product.coaPath ?? `/coas/${product.slug}`}>COA</Link>
+        {product.coaFile ? (
+          <Link className="btn" href={`/coas/${product.coaFile}`}>COA</Link>
         ) : (
-          <button className="btn" disabled>COA unavailable</button>
+          <button className="btn" disabled>COA coming soon</button>
         )}
         {product.inStock ? (
           <button className="btn btnPrimary" onClick={() => add(product.id, 1)}>Add to cart</button>

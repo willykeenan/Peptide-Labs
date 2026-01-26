@@ -106,3 +106,71 @@ button,input{font:inherit;}
   border-color:var(--border2);
   background:rgba(255,255,255,.08);
 }
+.hero{
+  position:relative;
+  min-height:520px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px 0;
+  overflow:hidden;
+}
+.hero-inner{
+  position:relative;
+  z-index:2;
+  max-width:980px;
+  width:100%;
+}
+.dna-hero{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  z-index:1;
+}
+.dna-layer{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  animation:dna-fade 24s ease-in-out infinite;
+}
+.dna-layer svg{
+  width:140%;
+  height:140%;
+  transform:translate(-10%, -10%);
+  animation:dna-drift 18s ease-in-out infinite;
+}
+.dna-variant-2{animation-delay:8s;}
+.dna-variant-3{animation-delay:16s;}
+.dna-variant-2 svg{animation-delay:6s;}
+.dna-variant-3 svg{animation-delay:12s;}
+.dna-gradient{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.12), transparent 45%),
+    radial-gradient(circle at 80% 10%, rgba(90,160,255,.12), transparent 40%),
+    linear-gradient(180deg, rgba(7,11,16,.85), rgba(7,11,16,.2), rgba(7,11,16,.9));
+  animation:dna-glow 14s ease-in-out infinite;
+}
+@keyframes dna-drift{
+  0%,100%{transform:translate(-10%, -12%) scale(1);}
+  50%{transform:translate(-6%, -6%) scale(1.02);}
+}
+@keyframes dna-fade{
+  0%,20%{opacity:0;}
+  30%,55%{opacity:1;}
+  70%,100%{opacity:0;}
+}
+@keyframes dna-glow{
+  0%,100%{opacity:.7;}
+  50%{opacity:1;}
+}
+@media (max-width: 720px){
+  .hero{min-height:420px;}
+}
+@media (prefers-reduced-motion: reduce){
+  .dna-layer,
+  .dna-layer svg,
+  .dna-gradient{animation:none !important;}
+  .dna-layer{opacity:.6;}
+}

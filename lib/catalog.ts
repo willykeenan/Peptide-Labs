@@ -12,6 +12,7 @@ export type Product = {
   priceMax?: number;
   inStock: boolean;
   hasCOA: boolean;
+  coaFile?: string;
   coaPath?: string;
   short: string;
 };

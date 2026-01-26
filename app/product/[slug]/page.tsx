@@ -48,10 +48,10 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
       </div>
 
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
-        {product.hasCOA ? (
-          <Link className="btn" href={product.coaPath ?? `/coas/${product.slug}`}>View COA</Link>
+        {product.coaFile ? (
+          <Link className="btn" href={`/coas/${product.coaFile}`}>View COA</Link>
         ) : (
-          <button className="btn" disabled>COA unavailable</button>
+          <button className="btn" disabled>COA coming soon</button>
         )}
         <Link className="btn" href="/shop">Back to shop</Link>
       </div>
