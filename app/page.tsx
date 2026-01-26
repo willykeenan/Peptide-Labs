@@ -42,7 +42,7 @@ export default function Home() {
           </div>
           <Link className="btn" href="/shop">View all</Link>
         </div>
-        <ProductGrid products={FEATURED} />
+        <ProductGrid products={FEATURED} variant="featured" />
       </section>
 
       <hr className="hr" />

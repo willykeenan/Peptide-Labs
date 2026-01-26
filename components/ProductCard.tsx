@@ -5,7 +5,15 @@ import { formatPriceDisplay } from "@/lib/catalog";
 import { useCart } from "@/components/cart/CartContext";
 import ProductImage from "@/components/ProductImage";
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({
+  product,
+  imageFit = "cover",
+  imageHeight = 180,
+}: {
+  product: Product;
+  imageFit?: "cover" | "contain";
+  imageHeight?: number;
+}) {
   const { add } = useCart();
 
   return (
@@ -16,7 +24,8 @@ export default function ProductCard({ product }: { product: Product }) {
         src={product.image}
         width={520}
         height={520}
-        style={{ width: "100%", height: 180 }}
+        fit={imageFit}
+        style={{ width: "100%", height: imageHeight }}
       />
 
       <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "flex-start", marginTop: 14 }}>

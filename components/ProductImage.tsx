@@ -6,6 +6,7 @@ type ProductImageProps = {
   slug: string;
   alt: string;
   src?: string;
+  fit?: "cover" | "contain";
   width?: number;
   height?: number;
   className?: string;
@@ -16,6 +17,7 @@ export default function ProductImage({
   slug,
   alt,
   src,
+  fit = "cover",
   width = 640,
   height = 640,
   className,
@@ -62,7 +64,7 @@ export default function ProductImage({
         width,
         height,
         borderRadius: 12,
-        objectFit: "cover",
+        objectFit: fit,
         background: "rgba(255,255,255,0.04)",
         ...style,
       }}
