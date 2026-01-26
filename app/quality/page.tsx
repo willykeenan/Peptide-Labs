@@ -6,7 +6,7 @@ export default function QualityPage() {
       <h1 style={{ marginTop: 0, marginBottom: 6 }}>Quality standards</h1>
       <p className="p" style={{ maxWidth: 980, marginTop: 0 }}>
         This page is designed to mirror the type of “trust” content shoppers look for: documentation, COAs, lot tracking, storage/handling language.
-        Keep it factual and RUO-safe (no outcomes/claims).
+        Keep it factual and policy-safe (no outcomes/claims).
       </p>
 
       <div className="grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", marginTop: 14 }}>
@@ -23,7 +23,7 @@ export default function QualityPage() {
           <div className="small" style={{ marginTop: 6 }}>Add SOP language (storage, handling, shipping) once finalized.</div>
         </div>
         <div className="badge">
-          <b>RUO-first compliance</b>
+          <b>Compliance-first</b>
           <div className="small" style={{ marginTop: 6 }}>No dosage/protocol guidance. No therapeutic claims.</div>
         </div>
       </div>

@@ -10,7 +10,7 @@ export default function ContactPage() {
         <div><b>Email:</b> support@ascensionlabs.example</div>
         <div><b>Location:</b> New York, NY</div>
         <div className="small" style={{ marginTop: 8 }}>
-          Please do not request dosing, administration guidance, or therapeutic advice. RUO only.
+          Please do not request dosing, administration guidance, or therapeutic advice.
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PRODUCTS } from "@/lib/catalog";
+import ProductImage from "@/components/ProductImage";
 
 export function generateStaticParams() {
   return PRODUCTS.map(p => ({ slug: p.slug }));
@@ -12,15 +13,24 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
   return (
     <div className="card" style={{ padding: 20 }}>
-      <div style={{ display: "flex", justifyContent: "space-between", gap: 14, flexWrap: "wrap" }}>
-        <div>
+      <div style={{ display: "flex", justifyContent: "space-between", gap: 18, flexWrap: "wrap" }}>
+        <div style={{ flex: "1 1 280px", minWidth: 240 }}>
+          <ProductImage
+            slug={product.slug}
+            alt={product.name}
+            width={720}
+            height={720}
+            style={{ width: "100%", height: 320 }}
+          />
+        </div>
+        <div style={{ flex: "2 1 320px", minWidth: 260 }}>
           <h1 style={{ margin: 0 }}>{product.name}</h1>
           <div className="p" style={{ marginTop: 8 }}>{product.subtitle}</div>
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 10 }}>
             {product.tags.map(t => <span key={t} className="pill">{t}</span>)}
           </div>
         </div>
-        <div style={{ textAlign: "right" }}>
+        <div style={{ textAlign: "right", minWidth: 160 }}>
           {product.compareAt ? <div className="small"><s>${product.compareAt.toFixed(2)}</s></div> : null}
           <div style={{ fontWeight: 900, fontSize: 20 }}>${product.price.toFixed(2)}</div>
           <div className="small" style={{ marginTop: 6 }}>{product.inStock ? "In stock" : "Out of stock"}</div>
@@ -29,11 +39,13 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
       <hr className="hr" />
 
-      <h3 style={{ marginTop: 0 }}>Research Notice</h3>
-      <p className="p" style={{ maxWidth: 920 }}>
-        This material is supplied strictly for laboratory research and analytical purposes only.
-        <b> Not for human or veterinary use.</b> No dosage, administration, or therapeutic guidance is provided.
-      </p>
+      <div className="badge" style={{ maxWidth: 520 }}>
+        <div style={{ fontWeight: 900, marginBottom: 8 }}>Product Details</div>
+        <div className="small"><b>SKU:</b> {product.sku}</div>
+        <div className="small"><b>Category:</b> {product.category}</div>
+        <div className="small"><b>Stock:</b> {product.inStock ? "In stock" : "Out of stock"}</div>
+        <div className="small"><b>Price:</b> ${product.price.toFixed(2)}</div>
+      </div>
 
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
         <Link className="btn" href={product.coaPath}>View COA</Link>

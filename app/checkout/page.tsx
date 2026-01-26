@@ -64,7 +64,7 @@ export default function CheckoutPage() {
       </div>
 
       <div className="small" style={{ marginTop: 10 }}>
-        Payments hook: <span className="kbd">app/api/checkout/route.ts</span> (swap in Stripe Checkout Session / processor when ready).
+        Payments hook: <span className="kbd">app/api/checkout/route.ts</span> (swap in a payment processor when ready).
       </div>
     </div>
   );

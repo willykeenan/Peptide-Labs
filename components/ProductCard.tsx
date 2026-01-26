@@ -2,13 +2,22 @@
 import Link from "next/link";
 import type { Product } from "@/lib/catalog";
 import { useCart } from "@/components/cart/CartContext";
+import ProductImage from "@/components/ProductImage";
 
 export default function ProductCard({ product }: { product: Product }) {
   const { add } = useCart();
 
   return (
     <div className="card">
-      <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "flex-start" }}>
+      <ProductImage
+        slug={product.slug}
+        alt={product.name}
+        width={520}
+        height={520}
+        style={{ width: "100%", height: 180 }}
+      />
+
+      <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "flex-start", marginTop: 14 }}>
         <div style={{ minWidth: 0 }}>
           <div style={{ fontWeight: 900, fontSize: 16 }}>{product.name}</div>
           <div className="small">{product.subtitle}</div>
@@ -33,10 +42,6 @@ export default function ProductCard({ product }: { product: Product }) {
         ) : (
           <span className="small">Out of stock</span>
         )}
-      </div>
-
-      <div className="small" style={{ marginTop: 10 }}>
-        RUO only • Not for human consumption
       </div>
     </div>
   );

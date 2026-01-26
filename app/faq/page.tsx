@@ -8,9 +8,9 @@ export default function FAQPage() {
 
       <div className="grid" style={{ marginTop: 14 }}>
         <div className="badge">
-          <b>What is RUO?</b>
+          <b>How is documentation handled?</b>
           <div className="small" style={{ marginTop: 6 }}>
-            RUO means “Research Use Only.” Products are supplied strictly for laboratory research and analytical purposes only and are not for human or veterinary use.
+            Each product includes a COA link (demo placeholder) and lot-tracking fields to show how documentation could be presented in production.
           </div>
         </div>
 

@@ -7,7 +7,7 @@ import { CartProvider } from "@/components/cart/CartContext";
 
 export const metadata: Metadata = {
   title: "Ascension Labs — Demo",
-  description: "Ascension Labs demo storefront (Research Use Only).",
+  description: "Ascension Labs demo storefront.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

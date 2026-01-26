@@ -11,7 +11,7 @@ export default function Home() {
         </div>
         <h1 className="h1">Ascension Labs</h1>
         <p className="p" style={{ maxWidth: 820 }}>
-          A clean, modern storefront demo for gathering feedback. Products are positioned as <b>Research Use Only (RUO)</b> with lot tracking, COA links, and a payments-ready checkout flow.
+          A clean, modern storefront demo for gathering feedback. Products are positioned for internal review with lot tracking, COA links, and a payments-ready checkout flow.
         </p>
 
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 14 }}>
@@ -23,8 +23,8 @@ export default function Home() {
         <div className="grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", marginTop: 16 }}>
           <div className="badge"><b>COA-linked</b><div className="small">COA placeholder pages per SKU.</div></div>
           <div className="badge"><b>Lot-tracked</b><div className="small">Structured metadata for scaling ops.</div></div>
-          <div className="badge"><b>Checkout-ready</b><div className="small">Server route stub for Stripe/processor.</div></div>
-          <div className="badge"><b>RUO-first</b><div className="small">Clear policies and acknowledgments.</div></div>
+          <div className="badge"><b>Checkout-ready</b><div className="small">Server route stub for a payment processor.</div></div>
+          <div className="badge"><b>Compliance-ready</b><div className="small">Clear policies and acknowledgments.</div></div>
         </div>
       </section>
 
