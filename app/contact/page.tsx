@@ -7,7 +7,7 @@ export default function ContactPage() {
       </p>
 
       <div className="badge" style={{ maxWidth: 720, marginTop: 12 }}>
-        <div><b>Email:</b> support@ascensionlabs.example</div>
+        <div><b>Email:</b> ascensionlabs.support@gmail.com</div>
         <div><b>Location:</b> New York, NY</div>
         <div className="small" style={{ marginTop: 8 }}>
           Please do not request dosing, administration guidance, or therapeutic advice.
