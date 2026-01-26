@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 type ProductImageProps = {
   slug: string;
   alt: string;
+  src?: string;
   width?: number;
   height?: number;
   className?: string;
@@ -14,12 +15,13 @@ type ProductImageProps = {
 export default function ProductImage({
   slug,
   alt,
+  src,
   width = 640,
   height = 640,
   className,
   style,
 }: ProductImageProps) {
-  const src = useMemo(() => `/images/products/${slug}.png`, [slug]);
+  const resolvedSrc = useMemo(() => src ?? `/products/${slug}.png`, [slug, src]);
   const [failed, setFailed] = useState(false);
 
   if (failed) {
@@ -51,7 +53,7 @@ export default function ProductImage({
 
   return (
     <Image
-      src={src}
+      src={resolvedSrc}
       alt={alt}
       width={width}
       height={height}

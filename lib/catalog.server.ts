@@ -16,6 +16,7 @@ const COA_MAP: Record<string, { file: string; lot?: string; date?: string; lab?:
 export const PRODUCTS = parseProductsCsv(csv).map(product => ({
   ...product,
   coaFile: COA_MAP[product.slug]?.file,
+  image: `/products/${product.slug}.png`,
 }));
 export const FEATURED = sortInStockFirst(PRODUCTS.filter(p => p.tags.includes("Featured")));
 export const RECENT = sortInStockFirst(PRODUCTS).slice(0, 4);

@@ -13,6 +13,7 @@ export default function ProductCard({ product }: { product: Product }) {
       <ProductImage
         slug={product.slug}
         alt={product.name}
+        src={product.image}
         width={520}
         height={520}
         style={{ width: "100%", height: 180 }}

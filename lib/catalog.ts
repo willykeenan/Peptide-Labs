@@ -14,6 +14,7 @@ export type Product = {
   hasCOA: boolean;
   coaFile?: string;
   coaPath?: string;
+  image?: string;
   short: string;
 };
 
