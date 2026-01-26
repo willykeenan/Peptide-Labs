@@ -18,9 +18,6 @@ export default function QualityPage() {
   return (
     <div className="card">
       <h1 style={{ marginTop: 0, marginBottom: 6 }}>Certificate of Analysis</h1>
-      <p className="p" style={{ maxWidth: 980, marginTop: 0 }}>
-        Documentation-forward catalog with lot tracking and COA access. All listings are presented for research and lab workflows with neutral, factual copy.
-      </p>
 
       <h2 className="h2" style={{ marginTop: 0 }}>Certificates of Analysis (COAs)</h2>
 
