@@ -15,8 +15,6 @@ export default function ProductCard({
   imageHeight?: number;
 }) {
   const { add } = useCart();
-  const hideCoa = product.slug.startsWith("bacwater");
-
   return (
     <div className="card">
       <ProductImage
@@ -47,13 +45,9 @@ export default function ProductCard({
 
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 14 }}>
         <Link className="btn" href={`/product/${product.slug}`}>View</Link>
-        {!hideCoa && (
-          product.coaFile ? (
-            <Link className="btn" href={`/coas/${product.coaFile}`}>COA</Link>
-          ) : (
-            <button className="btn" disabled>COA coming soon</button>
-          )
-        )}
+        {product.coaFile ? (
+          <Link className="btn" href={`/coas/${product.coaFile}`}>COA</Link>
+        ) : null}
         {product.inStock ? (
           <button className="btn btnPrimary" onClick={() => add(product.id, 1)}>Add to cart</button>
         ) : (

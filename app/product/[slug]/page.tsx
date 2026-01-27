@@ -9,7 +9,6 @@ export function generateStaticParams() {
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
   const product = PRODUCTS.find(p => p.slug === params.slug);
-  const hideCoa = product?.slug.startsWith("bacwater");
 
   if (!product) return <div className="card">Not found</div>;
 
@@ -50,13 +49,9 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
       </div>
 
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
-        {!hideCoa && (
-          product.coaFile ? (
-            <Link className="btn" href={`/coas/${product.coaFile}`}>View COA</Link>
-          ) : (
-            <button className="btn" disabled>COA coming soon</button>
-          )
-        )}
+        {product.coaFile ? (
+          <Link className="btn" href={`/coas/${product.coaFile}`}>View COA</Link>
+        ) : null}
         <Link className="btn" href="/shop">Back to shop</Link>
       </div>
     </div>
