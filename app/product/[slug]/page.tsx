@@ -50,7 +50,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
         {product.coaFile ? (
-          <Link className="btn" href={`/coas/${product.coaFile}`}>View COA</Link>
+          <Link className="btn" href={`/coas/${product.slug}`}>View COA</Link>
         ) : null}
         <Link className="btn" href="/shop">Back to shop</Link>
       </div>
