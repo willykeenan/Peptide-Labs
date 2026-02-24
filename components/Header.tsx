@@ -23,6 +23,7 @@ export default function Header() {
           <Link href="/shop">Shop</Link>
           <Link href="/collections">Collections</Link>
           <Link href="/quality">Quality</Link>
+          <Link href="/blog">Research</Link>
           <Link href="/faq">FAQ</Link>
           <Link href="/contact">Contact</Link>
           <CartButton />

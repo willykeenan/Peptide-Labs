@@ -8,8 +8,12 @@ import { PRODUCTS } from "@/lib/catalog.server";
 import DnaHeroBackground from "@/components/DnaHeroBackground";
 
 export const metadata: Metadata = {
-  title: "Ascension Labs — Demo",
-  description: "Ascension Labs demo storefront.",
+  title: "Ascension Labs — Research Peptides & Compounds",
+  description: "Premium peptides and compounds. Every product ships with full documentation, certificates of analysis, and lot tracking.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
