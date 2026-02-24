@@ -14,6 +14,9 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
+  verification: {
+    google: "izoM3pgPMTiiW8MCD36jc5JojHbK1ZwbY14D6qzB5pg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
