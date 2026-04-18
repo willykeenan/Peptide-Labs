@@ -1,31 +1,11 @@
-name,slug,sku,subtitle,category,tags,price,isVariable,priceMin,priceMax,inStock,hasCOA
-BPC-157 Body Protection Compound Research Peptide 10mg,bpc-157-10mg,BPC-10,Body protection compound,Singles,"Recovery,Featured,Research",89.99,false,,,false,true
-TB-500 Thymosin Beta-4 Research Peptide 10mg,tb500-10mg,TB5-10,Thymosin beta-4 research peptide,Singles,"Recovery,Research",79.99,false,,,false,true
-Cagri Amylin-Pathway Research Peptide 5mg,cagri-5mg,CAGRI-5,Amylin-pathway research peptide,Singles,"Metabolic,Research",74.99,false,,,false,true
-DSIP Circadian Research Peptide 5mg,dsip-5mg,DSIP-5,Circadian research peptide,Singles,"Neuro,Research",49.99,false,,,false,true
-Epitalon Research Peptide 10mg,epitalon-10mg,EPI-10,Epithalamin-derived research peptide,Singles,"Longevity,Research",54.99,false,,,false,true
-GHK-CU Copper Tripeptide Research Compound 50mg,ghk-cu-50mg,GHKCU-50,Copper tripeptide research compound,Singles,"Dermal,Research",54.99,false,,,false,true
-GLOW Dermal Peptide Research Complex,glow-dermal,GLOW,Dermal research peptide complex,Blends,"Dermal,Blends",119.99,false,,,false,true
-GLP-1Sg Single Agonist Research Peptide 5mg,glp-1sg-5mg,GLP1SG-5,Single agonist research peptide,Singles,"Metabolic,Research",89.99,false,,,false,true
-NeuroPep™ Research Complex 50mg,neuropep-50mg,NP-50,N-Acetyl Semax Amidate 21.85mg · N-Acetyl Selank Amidate 8.83mg · PE-22-28 10.55mg · Pinealon 10.71mg,Blends,"Neuro,Blends,Featured",129.99,false,,,false,true
-Ipamorelin Secretagogue Research Peptide 10mg,ipamorelin-10mg,IPA-10,Secretagogue research peptide,Singles,"Recovery,Research",64.99,false,,,false,true
-KLOW Multi-Peptide Research Complex 80mg,klow-kl80,KL80,KPV 10mg · BPC-157 10mg · TB-500 10mg · GHK-Cu 50mg,Blends,"Featured,Blends",100.00,false,,,true,true
-KPV Tripeptide Research Compound 10mg,kpv-10mg,KPV-10,Tripeptide research compound,Singles,"Dermal,Research",69.99,false,,,false,true
-Melanotan-2 Research Peptide 10mg,melanotan-2-10mg,MT2-10,Melanocortin research peptide,Singles,"Research",54.99,false,,,false,true
-MOTS-C Mitochondrial Research Peptide 10mg,mots-c-10mg,MOTSC-10,Mitochondrial signaling peptide,Singles,"Metabolic,Research",64.99,false,,,false,true
-NAD+ pH Balanced Research Coenzyme 500mg,nad-500mg,NAD-500,pH balanced research coenzyme,Singles,"Metabolic,Research",99.99,false,,,false,true
-Pinealon Neuroactive Tripeptide Research Compound 20mg,pinealon-20mg,PIN-20,Neuroactive tripeptide,Singles,"Neuro,Research",59.99,false,,,false,true
-PT-141 Research Peptide 10mg,pt-141-10mg,PT141-10,Melanocortin signaling peptide,Singles,"Research",59.99,false,,,false,true
-RETA GLP-3RT Tri-Agonist Research Peptide 10mg,reta-rt10,RT10,Tri-agonist research peptide,Singles,"Featured,Metabolic",70.00,false,,,true,true
-Selank Neuropeptide Research Analog 28mg,selank-28mg,SEL-28,Neuropeptide research analog,Singles,"Neuro,Research",74.99,false,,,false,true
-Semax Neuroactive Peptide Research Analog 30mg,semax-30mg,SEM-30,Neuroactive research analog,Singles,"Neuro,Research",74.99,false,,,false,true
-Sermorelin GHRH Analog Research Peptide 10mg,sermorelin-10mg,SER-10,GHRH analog research peptide,Singles,"Recovery,Research",79.99,false,,,false,true
-SSM Systematic Signaling Metabolic Research Compound 10mg,ssm-10mg,SSM-10,Systematic signaling compound,Singles,"Metabolic,Research",69.99,false,,,false,true
-Syn-AKE Neuromodulatory Research Analog 200mg,syn-ake-200mg,SYN-200,Neuromodulatory peptide,Singles,"Dermal,Research",64.99,false,,,false,true
-Tesamorelin GHRH Research Peptide 10mg,tesamorelin-10mg,TESA-10,Growth hormone releasing hormone analog,Singles,"Recovery,Research",89.99,false,,,false,true
-SynerGH™ GH Secretagogue Research Blend 10/3mg,synergh-blend-10-3,SYNERGH-103,Tesamorelin 10mg · Ipamorelin 3mg GH secretagogue blend,Blends,"Recovery,Blends,Featured",119.99,false,,,false,true
-Thymalin Thymic Peptide Research Complex 12mg,thymalin-12mg,THY-12,Thymic peptide complex,Singles,"Research",59.99,false,,,false,true
-TIRZ GLP-2TZ Dual Agonist Research Peptide,tirz-gtz,TIRZ,Dual agonist research peptide,Singles,"Metabolic,Research",,true,89.99,179.99,false,true
-VIP Research Peptide 10mg,vip-10mg,VIP-10,Vasoactive intestinal peptide,Singles,"Neuro,Research",79.99,false,,,false,true
-Bacteriostatic Water 10ml,bacwater-10ml,BAC-10,Sterile lab accessory · Limit 1 per order,Accessories,"Essentials",15.00,false,,,true,false
-pH Test Strips 0-14 Scale,ph-strips,PH-014,pH testing strips,Accessories,"Essentials",9.00,false,,,true,false
+name,slug,sku,subtitle,category,tags,price,isVariable,priceMin,priceMax,inStock,hasCOA,preorder
+KLOW Multi-Peptide Research Complex 80mg,klow-kl80,KL80,KPV 10mg · BPC-157 10mg · TB-500 10mg · GHK-Cu 50mg,Blends,"Featured,Blends",109.99,false,,,true,true,false
+RETA GLP-3RT Tri-Agonist Research Peptide 10mg,reta-rt10,RT10,Tri-agonist research peptide,Singles,"Featured,Metabolic",69.99,false,,,true,true,false
+Bacteriostatic Water 10ml,bacwater-10ml,BAC-10,Sterile lab accessory,Accessories,"Essentials",15.00,false,,,true,false,false
+MOTS-C Mitochondrial Research Peptide 10mg,mots-c-10mg,MOTSC-10,Mitochondrial signaling peptide,Singles,"Metabolic,Research",64.99,false,,,false,true,false
+Melanotan-2 Research Peptide 10mg,melanotan-2-10mg,MT2-10,Melanocortin research peptide,Singles,"Research",54.99,false,,,true,true,false
+NAD+ pH Balanced Research Coenzyme 500mg,nad-500mg,NAD-500,pH balanced research coenzyme,Singles,"Metabolic,Research",99.99,false,,,false,true,false
+CJC-1295/Ipamorelin GH Secretagogue Research Blend 10mg,cjc-ipa-10mg,CJCIPA-10,CJC-1295 5mg · Ipamorelin 5mg,Blends,"Recovery,Blends,Research",89.99,false,,,true,false,false
+Selank Neuropeptide Research Peptide 10mg,selank-10mg,SEL-10,Neuropeptide research analog,Singles,"Neuro,Research",40.00,false,,,true,false,false
+Semax Neuroactive Research Peptide 10mg,semax-10mg,SEM-10,Neuroactive research analog,Singles,"Neuro,Research",40.00,false,,,true,false,false
+Tesamorelin GH Releasing Research Peptide 10mg,tesamorelin-10mg,TESA-10,GH releasing research peptide,Singles,"Recovery,Research",84.99,false,,,true,false,false
